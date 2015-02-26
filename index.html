@@ -4,9 +4,9 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -32,7 +32,7 @@
 
         <section id="main_content">
           <h1>
-<a name="gsv" class="anchor" href="#gsv"><span class="octicon octicon-link"></span></a>GSv</h1>
+<a id="gsv" class="anchor" href="#gsv" aria-hidden="true"><span class="octicon octicon-link"></span></a>GSv</h1>
 
 <p>LINUX_____________View</p>
 
@@ -50,12 +50,12 @@
 <p>构建GSv的软性需求：</p>
 
 <pre><code>1 ：在png图像的支持方面采用 libpng12 解码，您要保证已安装 libpng12， 并拥有 png 头文件. （你可以在此页面中下载安装libpng12）
-2 : 在字体方面目前采用了freetype ，计算机要求同上. (点阵字体正在制作中)
+2 :字体方面使用了新的font点阵字集,放弃原先的freetype方法
 </code></pre>
 
 <p>构建GSv的法律申明：</p>
 
-<pre><code>1 ：GSv采用GPLv2版法律，您若要使用并开发完善GSv，您必须保证其符合GPLv2法律，而不是GPL.
+<pre><code>1 ：GSv采用GPLv2版法律，您若要使用并开发完善GSv，您必须 保证其符合GPLv2法律，而不是GPL.
 2 ：法律内容附在GSv的项目根目录下，如若未找到，可以在 GNU 相关网址查询.
 3 : GPLv2法律内容请详细阅读.
 </code></pre>
@@ -72,29 +72,31 @@
 <pre><code>1 ：下载GSv源.
 2 ：解压得到项目文件夹，例如的到 ‘GS_Project’ 这个文件夹.
 3 ：cd ./GS_Project/  将工作目录切换至此.
-4 : make 使用Makefile编译项目.  (因为时间问题，没有使用auto软体生成严谨的Makefile文件，只是粗略的写了Makefile)
-5 ： 备注 ：（在Makefile中屏蔽了编译GSv字体支持的相关代码，如若需要请自行处理Makefile文件）
-     备注 ：（install项和uninstall模块有问题，只能自行安装）
-6 ：安装 ：-&gt;
-        -&gt; cp -rf ./include /usr/include/GS
-        -&gt; cp -rf ./libgsv.so /usr/lib/
-        -&gt; (相关目录请自行变更)
+5 ：# make #编译
+    # make install #安装
+    # cd ./test/ #测试程序目录
+        ex:
+            # gcc GS_Screeninfo.c -lgsv -o GS_Screeninfo
+            # GS_Screeninfo #输出屏幕信息
+            # gcc GS_image.c -lgsv -lgsv_image -o GS_image
+            # GS_image bg.png #输出bg.png图像
+            # gcc GS_Window.c -lgsv -o GS_Windoe
+            # GS_Window #输出窗口
+    # make uninstall #卸载
+    # make clean #清除
+6 : 上述显示图像的程序均在字符界面下运行,若在gnome,gtk等界面环境下运行均会因为图像输出的抢占问题而无法显示图像
 </code></pre>
 
 <p>构建方法2：</p>
 
-<pre><code>你同样可以clone GSv到你本地计算机做开发，只需要最后再向上提交发出合并请求就可以完成.
-</code></pre>
-
-<h1></h1>
+<h1>
+<a id="----git-clone-httpsgithubcomgloxecgsvgit" class="anchor" href="#----git-clone-httpsgithubcomgloxecgsvgit" aria-hidden="true"><span class="octicon octicon-link"></span></a>    git clone <a href="https://github.com/gloxec/GSv.git">https://github.com/gloxec/GSv.git</a>
+</h1>
 
 <p>开发近期目标：</p>
 
-<pre><code>1 : 中层的Surface的分装;
-    -&gt; 涉及数据的从线性到矩形分割的算法
-    -&gt; Alpha透明混合的处理算法
-    -&gt; 关于设备是否原生支持Alpha的讨论及相关处理算法
-    -&gt; 关于设备从32位色到16位色，等其他位色的支持及转换处理算法
+<pre><code>    -&gt; 关于窗口等UI事件的信号处理机制
+    -&gt; 关于屏幕图像输出的独占模式
 </code></pre>
 
 <h1></h1>
@@ -106,9 +108,9 @@
 
 <h1></h1>
 
-<p>————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-                                               GSv项目开发组期待你的加入！
-————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</p>
+<p>—————————————————————————————————————————————————————————————
+                 GSv项目开发组期待你的加入！<br>
+—————————————————————————————————————————————————————————————</p>
 
 <h1></h1>
         </section>

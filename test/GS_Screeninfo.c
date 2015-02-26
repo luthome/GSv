@@ -1,4 +1,5 @@
-#include <GS/fb.h>
+#include <GS/gsfb.h>
+#include <stdio.h>
  
 /* 屏幕信息的得到 */ 
  
@@ -12,7 +13,7 @@ int main(void)
     printf("\tColor depth: %d", myscreen.fb_var.bits_per_pixel);
     printf("\n");
     printf("If you want to know more info for your machine's screen\n");
-    pritnf("the gs_fb structure will help you. (see in gsfb.h)\n");
+    printf("the gs_fb structure will help you. (see in gsfb.h)\n");
     printf("  :-)  \n");
     
     gs_fb_end(&myscreen);

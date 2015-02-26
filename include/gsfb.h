@@ -3,6 +3,11 @@
 
 #include <linux/fb.h>
 
+#define GS_ON 1
+#define GS_OFF 0
+#define GS_FAILED  1
+#define GS_SUCCESSD 0
+
 typedef struct gsfb{
 	int fd;
 	char *dev;

@@ -1,4 +1,5 @@
 #include <GS/gsimage.h>
+#include <stdio.h>
 
 /* Let's draw a image on screen */
 
@@ -12,8 +13,8 @@ int main(int argc, char *argv[])
 	
 	gs_image ima; /* 首先建立个存放image的结构地址 */
 
-	gs_image_load(argv[1], &ima); /* 载入图像数据 */
-	gs_image_draw(&ima, 90, 90); /* 画  图 */
+	gs_image_load(GS_PNG, argv[1], &ima); /* 载入图像数据 */
+	gs_image_draw(&ima, 0, 0); /* 画  图 */
 	gs_image_destory(&ima); /* 清除ima内图像数据所占的内存*/
 	return 0;
 }

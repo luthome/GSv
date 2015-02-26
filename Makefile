@@ -1,10 +1,14 @@
 # /**************************************************
-# * This Makefile write by GaoLei                   *
-# * if you have any problems, you can chat with me! *
-# * MY QQ:763727697                                 *
-# * MY E-MAIL : gloxec@gmail.com                    *
+# * This Makefile write by GaoLei               									    *
+# * if you have any problems, you can chat with me!		  		    *
+# * MY QQ:763727697                             											    *
+# * MY E-MAIL : gloxec@gmail.com                 								    *
 # **************************************************/
 
+####################################################
+#just a test vesion
+#History:
+#2014/12/27 gloxec second release
 
 
 
@@ -13,40 +17,55 @@ CFLAGS =  -g -fPIC -shared
 CPPFLAGS = -I./include/
 prefix = /usr
 
-all: libgsv.so
+all:libgsv.so libgsv_image.so
 
-libgsf.so: gsfb.o gsfbdraw.o gsimage.o png.o
+
+libgsv.so: gsfb.o gsfbdraw.o gstools.o gsfont.o gswindow.o font_8x8.o font_8x16.o
 	$(CC) $(CFLAGS) $(OUTPUT_OPTION) $^
+libgsv_image.so: gsimage.o png.o image_mixer.o
+	$(CC) $(CFLAGS) -lgsv -lpng $(OUTPUT_OPTION) $^
 
 
-gsfb.o: ./src/output/gsfb.c 
+gsfb.o: ./src/kernel/gsfb.c 
 	$(CC) -c -g $< $(CPPFLAGS)
-gsfbdraw.o: ./src/output/gsfbdraw.c 
+gsfbdraw.o: ./src/kernel/gsfbdraw.c 
 	$(CC) -c -g $< $(CPPFLAGS)
-gsimage.o: ./src/gsimage.c ./src/image/png.c 
+gstools.o: ./src/tools/gstools.c
+	$(CC) -c -g $< $(CPPFLAGS)
+gsimage.o: ./src/image/gsimage.c ./src/image/png.c 
+#gsimage.o: ./src/image/gsimage.c 
 	$(CC) -c -g $< $(CPPFLAGS)
 png.o: ./src/image/png.c 
 	$(CC) -c -g $< $(CPPFLAGS)
-#gsfont.o: ./src/font/gsfont.c ./src/font/gstext.c 
-#	$(CC) -c $< $(CPPFLAGS)
+image_mixer.o: ./src/image/image_mixer.c
+	$(CC) -c -g $< $(CPPFLAGS)
+gsfont.o: ./src/font/gsfont.c 
+	$(CC) -c -g $< $(CPPFLAGS)
+font_8x8.o: ./src/font/font_8x8.c
+	$(CC) -c -g $< $(CPPFLAGS)
+font_8x16.o: ./src/font/font_8x16.c
+	$(CC) -c -g $< $(CPPFLAGS)
+gswindow.o: ./src/application/gswindow.c
+	$(CC) -c -g $< $(CPPFLAGS)
 
 
 install:
 	@echo "GSv installing ..."
-	-cp $(CPPFLAGS) $(prefix)/GS
-	-cp ./libgsv.so $(prefix)/lib/
+	-mkdir /usr/include/GS
+	-cp -fr ./include/* $(prefix)/include/GS/
+	-cp ./libgsv.so ./libgsv_image.so $(prefix)/lib/
 	@echo "[GS install] finished!"
 
 uninstall:
 	@echo "GSv unistall ..."
-	-rm $(prefix)/lib/libgsf.so
-	-rm -rf $(prefix)/GS
+	-rm $(prefix)/lib/libgsv.so
+	-rm -rf $(prefix)/include/GS
 	@echo "[GSv unistall] finished!"
 
 
 clean:
 	@echo "[GSv MAKE] : cleaning project!"
-	-rm libgsf.so 
+	-rm libgsv.so 
 	-rm *.o
 	@echo "[GSv MAKE] : clean completed!"
 
